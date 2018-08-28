@@ -1,0 +1,74 @@
+<h1>Bidding Application</h1>
+  <nav>
+    <a routerLink="/login" routerLinkActive="active">Users</a>
+    <a routerLink="/bidding" routerLinkActive="active">Bidding</a>
+    <a routerLink="/login" routerLinkActive="active">Logout</a>
+  </nav>
+
+<h1>
+ Auctions
+  </h1>
+  <li *ngIf="msg">
+      Result: <i>{{msg}}</i>
+    </li>
+    <br>
+  <div>
+    <label>Reserve Price :
+      <input #reservePrice />
+    </label>
+    <label>Item Id :
+      <input #itemId />
+    </label>
+    <label>Item Description :
+      <input #itemDescription />
+    </label> 
+    <!-- (click) passes input value to add() and then clears the input -->
+     &nbsp;<button (click)="add(reservePrice.value, itemId.value, itemDescription.value); reservePrice.value='';itemId.value='';itemDescription.value=''">
+      add
+    </button>
+  </div>
+  <br> <br>
+<div *ngIf="auction!='' && auction!=undefined" >
+  <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+      <thead>
+      <tr>
+          <th style="width: 10%">
+              <mfDefaultSorter by="itemId">Item Id</mfDefaultSorter>
+          </th>
+          <th style="width: 10%">
+              <mfDefaultSorter by="description">Description</mfDefaultSorter>
+          </th>
+          <th style="width: 10%">
+              <mfDefaultSorter by="currentBid">Current Bid</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+              <mfDefaultSorter by="auctionItemId">Auction Item Id</mfDefaultSorter>
+          </th>
+          <th style="width: 10%">
+              <mfDefaultSorter by="reservePrice">Reserve Price</mfDefaultSorter>
+          </th>
+          <th style="width: 10%"></th>
+          <th style="width: 20%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let auct of auction">
+          <td> {{auct.item.itemId}} </td>
+          <td> {{auct.item.description}} </td>
+          <td>{{auct.currentBid}}</td>
+          <td>{{auct.auctionItemId}}</td>
+          <td>{{auct.reservePrice}}</td>
+           
+          <td><button (click)="openDialog(auct.auctionItemId)">Bid</button></td>
+          <td></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+          <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+          </td>
+      </tr>
+      </tfoot>
+  </table>
+</div>

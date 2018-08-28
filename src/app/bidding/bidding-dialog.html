@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Enter your Bid information</h1>
+<div mat-dialog-content>
+      <table>
+          <tr>
+                <td>
+                        <label>MaxAutoBidAmount :
+                        <input matInput [(ngModel)]="data.maxAutoBidAmount"></label>
+                </td>
+          </tr>
+          <tr>
+                <td>
+                        <label>Bidder Name:
+                        <input matInput [(ngModel)]="data.bidderName"></label>
+                </td>
+          </tr>
+      </table>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>&nbsp;&nbsp;
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
